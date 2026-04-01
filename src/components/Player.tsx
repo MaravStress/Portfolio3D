@@ -74,11 +74,11 @@ export default function Player(props: any) {
     });
 
     return (
-        <RigidBody 
-            ref={bodyRef} 
-            colliders="cuboid" 
+        <RigidBody
+            ref={bodyRef}
+            colliders="cuboid"
             lockRotations // Evitar que el cubo se caiga rodando
-            position={props.position} 
+            position={props.position}
         >
             <mesh ref={meshRef} castShadow>
                 <boxGeometry args={[1, 1, 1]} />

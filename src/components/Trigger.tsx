@@ -1,31 +1,36 @@
 import { useState } from 'react';
 import { CuboidCollider } from '@react-three/rapier';
 
-export default function Trigger() {
+interface TriggerProps {
+    position: [number, number, number];
+    size: [number, number, number];
+    visible?: boolean;
+    onEnter: () => void;
+    onExit: () => void;
+}
+
+export default function Trigger({ position, size, visible = false, onEnter, onExit }: TriggerProps) {
     const [isInside, setIsInside] = useState(false);
 
     return (
-        <group position={[3, -0.5, 3]}>
-            {/* Elemento visual para que sepamos dónde está la zona */}
-            <mesh>
-                <boxGeometry args={[3, 1, 3]} />
+        <group position={position}>
+            <mesh visible={visible}>
+                <boxGeometry args={size} />
                 <meshStandardMaterial
                     color={isInside ? 'lime' : 'yellow'}
                     transparent
                     opacity={0.5}
                 />
             </mesh>
-
-            {/* Sensor físico (Trigger) */}
             <CuboidCollider
-                args={[1.5, 0.5, 1.5]} // args en CuboidCollider son mitades (1.5 = 3 de ancho)
+                args={size.map((s) => s / 2) as [number, number, number]} // args en CuboidCollider son mitades (1.5 = 3 de ancho)
                 sensor
                 onIntersectionEnter={() => {
-                    console.log("🔥 ¡El jugador activó el trigger!");
+                    onEnter();
                     setIsInside(true);
                 }}
                 onIntersectionExit={() => {
-                    console.log("❄️ El jugador salió de la zona.");
+                    onExit();
                     setIsInside(false);
                 }}
             />
