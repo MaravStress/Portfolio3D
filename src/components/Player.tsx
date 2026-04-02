@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { RigidBody, RapierRigidBody } from '@react-three/rapier';
@@ -9,11 +9,17 @@ const ACCELERATION = 15;
 const DECELERATION = 10;
 const ROTATION_SPEED = 10;
 
-export default function Player(props: any) {
+const Player = forwardRef((props: any, ref) => {
     const meshRef = useRef<THREE.Mesh>(null);
     const bodyRef = useRef<RapierRigidBody>(null);
     const velocity = useRef(new THREE.Vector3());
     const { forward, backward, left, right } = usePlayerControls();
+
+    useImperativeHandle(ref, () => ({
+        get position() {
+            return bodyRef.current ? bodyRef.current.translation() : { x: 0, y: 0, z: 0 };
+        }
+    }));
 
     useFrame((state, delta) => {
         if (!meshRef.current || !bodyRef.current) return;
@@ -90,4 +96,6 @@ export default function Player(props: any) {
             </mesh>
         </RigidBody>
     );
-}
+});
+
+export default Player;
