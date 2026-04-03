@@ -13,7 +13,7 @@ interface BlockingProps {
 export default function Blocking({ type = 'box', position = [0, 0, 0], size = [1, 1, 1], rotation = [0, 0, 0], color = "#525252", rigidBodyType = 'fixed', visible = true }: BlockingProps) {
     return (
         <>
-            <RigidBody type={rigidBodyType}>
+            <RigidBody type={rigidBodyType} includeInvisible>
                 {type === 'box' && (
                     <mesh position={position} rotation={rotation} castShadow receiveShadow visible={visible}>
                         <boxGeometry args={size} />
