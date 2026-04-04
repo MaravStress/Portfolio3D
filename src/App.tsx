@@ -1,6 +1,8 @@
 import { Canvas, useFrame } from '@react-three/fiber';
+import { useState } from 'react';
 import Scene from './components/Scene/Scene';
-
+import HomeUI from './components/UI/HomeUI';
+import ContentUI from './components/UI/ContentUI';
 function CameraTracker() {
   useFrame(({ camera }) => {
     const el = document.getElementById('camera-coords');
@@ -14,8 +16,15 @@ function CameraTracker() {
 
 
 function App() {
+  const [UIpanel, setUIpanel] = useState<"home" | "trabajos_3D" | "trabajos_Programar" | "cine" | "gamesplace" | null>(null);
+
   return (
     <div style={{ width: '100vw', height: '100vh', margin: 0, padding: 0, position: 'relative' }}>
+      {/* UI Overlay */}
+      <div className="scene-ui-container" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 10 }}>
+        {UIpanel === "home" && <HomeUI />}
+        {UIpanel && UIpanel !== "home" && <ContentUI type={UIpanel} />}
+      </div>
       <div
         id="camera-coords"
         style={{
@@ -44,7 +53,7 @@ function App() {
       </div>
       <Canvas shadows camera={{ position: [5, 5, 10], fov: 50 }}>
         <CameraTracker />
-        <Scene />
+        <Scene setUIpanel={setUIpanel} />
       </Canvas>
     </div>
   );

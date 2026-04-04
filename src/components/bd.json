@@ -1,0 +1,131 @@
+{
+  "trabajos_3D": [
+    {
+      "id": "3d-1",
+      "titulo": "Modelo 3D - Robot Explorador",
+      "etiquetas": [
+        "Blender",
+        "Substance Painter",
+        "Sci-Fi"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1614730321146-b6fa6a46bcb4?auto=format&fit=crop&w=400&q=80",
+      "descripcion": "Un modelo 3D detallado de un robot explorador. Optimizado para motores de juego modernos. [Ver en Sketchfab](https://sketchfab.com/)"
+    },
+    {
+      "id": "3d-2",
+      "titulo": "Escenario Cyberpunk",
+      "etiquetas": [
+        "Maya",
+        "Unreal Engine 5",
+        "Environment"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=400&q=80",
+      "descripcion": "Creación de un entorno urbano cyberpunk con físicas y luces realistas. [Descargar Assets](https://example.com/)"
+    }
+  ],
+  "trabajos_Programar": [
+    {
+      "id": "prog-1",
+      "titulo": "E-commerce Premium",
+      "etiquetas": [
+        "React",
+        "Node.js",
+        "MongoDB"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80",
+      "descripcion": "Desarrollo Full Stack de un e-commerce con panel de administración y pasarela de pago. [Ver Repositorio](https://github.com/)"
+    },
+    {
+      "id": "prog-2",
+      "titulo": "App de Gestión de Tareas",
+      "etiquetas": [
+        "TypeScript",
+        "Tailwind CSS",
+        "Vite"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=400&q=80",
+      "descripcion": "Una herramienta súper rápida para organizar tareas usando metodologías ágiles. [Demo en Vivo](https://example.com/)"
+    }
+  ],
+  "cine": [
+    {
+      "id": "cine-1",
+      "titulo": "Cortometraje 'El Despertar'",
+      "etiquetas": [
+        "Dirección",
+        "Edición",
+        "VFX"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=400&q=80",
+      "descripcion": "Cortometraje de ciencia ficción premiado en festivales independientes. [Ver en YouTube](https://youtube.com/)"
+    },
+    {
+      "id": "cine-2",
+      "titulo": "Color Grading Comercial",
+      "etiquetas": [
+        "DaVinci Resolve",
+        "Color",
+        "Ads"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&w=400&q=80",
+      "descripcion": "Corrección de color y etalonaje para un comercial de una marca líder de bebidas. [Ver portfolio](https://example.com/)"
+    },
+    {
+      "id": "cine-2",
+      "titulo": "Color Grading Comercial",
+      "etiquetas": [
+        "DaVinci Resolve",
+        "Color",
+        "Ads"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&w=400&q=80",
+      "descripcion": "Corrección de color y etalonaje para un comercial de una marca líder de bebidas. [Ver portfolio](https://example.com/)"
+    },
+    {
+      "id": "cine-2",
+      "titulo": "Color Grading Comercial",
+      "etiquetas": [
+        "DaVinci Resolve",
+        "Color",
+        "Ads"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&w=400&q=80",
+      "descripcion": "Corrección de color y etalonaje para un comercial de una marca líder de bebidas. [Ver portfolio](https://example.com/)"
+    },
+    {
+      "id": "cine-2",
+      "titulo": "Color Grading Comercial",
+      "etiquetas": [
+        "DaVinci Resolve",
+        "Color",
+        "Ads"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1542204165-65bf26472b9b?auto=format&fit=crop&w=400&q=80",
+      "descripcion": "Corrección de color y etalonaje para un comercial de una marca líder de bebidas. [Ver portfolio](https://example.com/)"
+    }
+  ],
+  "gamesplace": [
+    {
+      "id": "game-1",
+      "titulo": "Juego Indie RPG",
+      "etiquetas": [
+        "Unity",
+        "C#",
+        "Pixel Art"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=80",
+      "descripcion": "Un emocionante juego RPG con mecánicas por turnos y una historia envolvente. [Jugar en Itch.io](https://itch.io/)"
+    },
+    {
+      "id": "game-2",
+      "titulo": "Prototipo de Carreras Arcade",
+      "etiquetas": [
+        "Godot Engine",
+        "GDScript",
+        "3D"
+      ],
+      "imagen": "https://images.unsplash.com/photo-1538481199005-c710c4d965fc?auto=format&fit=crop&w=400&q=80",
+      "descripcion": "Prototipo rápido de un juego de carreras con derrapes al estilo arcade de los 90. [Ver Gameplay log](https://example.com/)"
+    }
+  ]
+}

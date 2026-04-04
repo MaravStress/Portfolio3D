@@ -7,13 +7,16 @@ import Trigger from '../prefabs/Trigger';
 import Layer1 from './Layers/Layer1';
 import Layer2 from './Layers/Layer2';
 
-export default function Scene() {
+interface SceneProps {
+  setUIpanel: (panel: "home" | "trabajos_3D" | "trabajos_Programar" | "cine" | "gamesplace" | null) => void;
+}
+
+export default function Scene({ setUIpanel }: SceneProps) {
   const cameraControlRef = useRef<CameraControls>(null);
   const playerRef = useRef<any>(null);
   const [cameraFree, setCameraFree] = useState(true);
   const [cameraPosition, setCameraPosition] = useState([10, 8, 4]);
   const [camerafocus, setCamerafocus] = useState([0, 0, 0]);
-  const [UIpanel, setUIpanel] = useState<"home" | "trabajos_3D" | "trabajos_Programar" | "cine" | "gamesplace">("home");
   useFrame(() => {
     if (cameraFree) {
       // La cámara persigue al jugador fluidamente
@@ -48,42 +51,37 @@ export default function Scene() {
         <Trigger
           position={[0, -0.5, 0]}
           size={[10, 1, 10]}
-          onEnter={() => { setCameraFree(false); setCameraPosition([10, 8, 4]); setCamerafocus([0, 0, 0]); }}
-          onExit={() => { setCameraFree(true); setCameraPosition([15, 8, 0]); }}
+          onEnter={() => { setCameraFree(false); setCameraPosition([10, 8, 4]); setCamerafocus([0, 0, 0]); setUIpanel("home"); }}
+          onExit={() => { setCameraFree(true); setCameraPosition([15, 8, 0]); setUIpanel(null); }}
         />
         {/* estudios */}
         <Trigger
           position={[12.5, -0.5, 0]}
           size={[5, 1, 8]}
-          onEnter={() => { setCameraFree(false); setCameraPosition([19, 9, 0]); setCamerafocus([12.5, 0, 0]); }}
-          onExit={() => { setCameraFree(true); setCameraPosition([15, 8, 0]); }}
+          onEnter={() => { setCameraFree(false); setCameraPosition([19, 9, 0]); setCamerafocus([12.5, 0, 0]); setUIpanel("trabajos_3D"); }}
+          onExit={() => { setCameraFree(true); setCameraPosition([15, 8, 0]); setUIpanel(null); }}
         />
         {/* mirador */}
         <Trigger
           position={[22.5, 3.638, 0]}
           size={[5, 1, 10]}
-          onEnter={() => { setCameraFree(false); setCameraPosition([40, 18, 0]); setCamerafocus([22.5, 3.638, 0]); }}
-          onExit={() => { setCameraFree(true); setCameraPosition([15, 8, 0]); }}
+          onEnter={() => { setCameraFree(false); setCameraPosition([40, 18, 0]); setCamerafocus([22.5, 3.638, 0]); setUIpanel("trabajos_Programar"); }}
+          onExit={() => { setCameraFree(true); setCameraPosition([15, 8, 0]); setUIpanel(null); }}
         />
         {/* pasillo L (cine) */}
         <Trigger
           position={[12.5, -0.5, 15]}
           size={[15, 1, 7]}
-          onEnter={() => { setCameraFree(true); setCameraPosition([10, 8, -10]); }}
-          onExit={() => { setCameraFree(true); setCameraPosition([15, 8, 0]); }}
+          onEnter={() => { setCameraFree(true); setCameraPosition([10, 8, -10]); setUIpanel("cine"); }}
+          onExit={() => { setCameraFree(true); setCameraPosition([15, 8, 0]); setUIpanel(null); }}
         />
         {/* pasillo R (game)*/}
         <Trigger
           position={[12.5, -0.5, -15]}
           size={[15, 1, 7]}
-          onEnter={() => { setCameraFree(true); setCameraPosition([10, 8, 10]); }}
-          onExit={() => { setCameraFree(true); setCameraPosition([15, 8, 0]); }}
+          onEnter={() => { setCameraFree(true); setCameraPosition([10, 8, 10]); setUIpanel("gamesplace"); }}
+          onExit={() => { setCameraFree(true); setCameraPosition([15, 8, 0]); setUIpanel(null); }}
         />
-        {UIpanel === "home" && <HomeUI />}
-        {UIpanel === "trabajos_3D" && <Trabajos3DUI />}
-        {UIpanel === "trabajos_Programar" && <TrabajosProgramarUI />}
-        {UIpanel === "cine" && <CineUI />}
-        {UIpanel === "gamesplace" && <GamesPlaceUI />}
       </Physics>
       <CameraControls ref={cameraControlRef} />
     </>
