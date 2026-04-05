@@ -1,7 +1,8 @@
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef, useEffect, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { RigidBody, RapierRigidBody } from '@react-three/rapier';
+import { RigidBody, RapierRigidBody, CapsuleCollider } from '@react-three/rapier';
+import { useGLTF, useAnimations } from '@react-three/drei';
 import usePlayerControls from './usePlayerControls';
 
 const MAX_SPEED = 5;
@@ -10,10 +11,16 @@ const DECELERATION = 10;
 const ROTATION_SPEED = 10;
 
 const Player = forwardRef((props: any, ref) => {
-    const meshRef = useRef<THREE.Mesh>(null);
+    const groupRef = useRef<THREE.Group>(null);
     const bodyRef = useRef<RapierRigidBody>(null);
     const velocity = useRef(new THREE.Vector3());
     const { forward, backward, left, right } = usePlayerControls();
+    
+    // Cargar el modelo
+    const { scene, animations } = useGLTF('/player.glb');
+    const { actions } = useAnimations(animations, groupRef);
+    
+    const [animation, setAnimation] = useState('idle');
 
     useImperativeHandle(ref, () => ({
         get position() {
@@ -21,8 +28,19 @@ const Player = forwardRef((props: any, ref) => {
         }
     }));
 
+    // Control de animaciones
+    useEffect(() => {
+        const action = actions[animation];
+        if (action) {
+            action.reset().fadeIn(0.2).play();
+            return () => {
+                action.fadeOut(0.2);
+            };
+        }
+    }, [animation, actions]);
+
     useFrame((state, delta) => {
-        if (!meshRef.current || !bodyRef.current) return;
+        if (!bodyRef.current || !groupRef.current) return;
 
         // 1. Obtener los vectores direccionales de la cámara plana
         const forwardVector = new THREE.Vector3();
@@ -33,22 +51,50 @@ const Player = forwardRef((props: any, ref) => {
         const rightVector = new THREE.Vector3();
         rightVector.crossVectors(forwardVector, state.camera.up).normalize();
 
-        // 2. Obtener la dirección basada en el teclado y la rotación de la cámara
-        const direction = new THREE.Vector3();
+        // 2. Obtener la dirección basada en el teclado
+        const direction = new THREE.Vector3(0, 0, 0);
 
         if (forward) direction.add(forwardVector);
         if (backward) direction.sub(forwardVector);
         if (right) direction.add(rightVector);
         if (left) direction.sub(rightVector);
 
-        // Normalizar la dirección
+        // Determinar Animación
+        let nextAnimation = 'idle';
+        if (direction.lengthSq() > 0) {
+            // Calcular la diferencia de ángulo para saber si está rotando
+            const targetAngle = Math.atan2(direction.x, direction.z);
+            let angleDiff = targetAngle - groupRef.current.rotation.y;
+            
+            // Normalizar diferencia de ángulo
+            while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
+            while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
+
+            const rotationThreshold = 0.5; // Ajustar sensibilidad del giro
+
+            if (angleDiff > rotationThreshold) {
+                nextAnimation = 'run.turn.L';
+            } else if (angleDiff < -rotationThreshold) {
+                nextAnimation = 'run.turn.R';
+            } else {
+                nextAnimation = 'run';
+            }
+        } else {
+            nextAnimation = 'idle';
+        }
+
+        if (animation !== nextAnimation) {
+            setAnimation(nextAnimation);
+        }
+
+        // Normalizar la dirección para el movimiento
         if (direction.lengthSq() > 0) {
             direction.normalize();
 
-            // Rota el personaje suavemente hacia la dirección
+            // Rota el personaje suavemente hacia la dirección de movimiento
             const angle = Math.atan2(direction.x, direction.z);
             const targetRotation = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), angle);
-            meshRef.current.quaternion.slerp(targetRotation, ROTATION_SPEED * delta);
+            groupRef.current.quaternion.slerp(targetRotation, ROTATION_SPEED * delta);
         }
 
         // 3. Obtener la velocidad objetivo
@@ -58,7 +104,7 @@ const Player = forwardRef((props: any, ref) => {
         const currentLinVel = bodyRef.current.linvel();
         velocity.current.set(currentLinVel.x, currentLinVel.y, currentLinVel.z);
 
-        // 4. Aplicar aceleración y desaceleración iterativa
+        // 4. Aplicar aceleración y desaceleración
         if (direction.x !== 0) {
             velocity.current.x = THREE.MathUtils.lerp(velocity.current.x, targetVelocity.x, ACCELERATION * delta);
         } else {
@@ -71,10 +117,10 @@ const Player = forwardRef((props: any, ref) => {
             velocity.current.z = THREE.MathUtils.lerp(velocity.current.z, 0, DECELERATION * delta);
         }
 
-        // 5. Mover el cuerpo insertando la nueva velocidad de forma segura en las físicas
+        // 5. Mover el cuerpo físico
         bodyRef.current.setLinvel({
             x: velocity.current.x,
-            y: currentLinVel.y, // mantenemos la Y real para la gravedad/caídas
+            y: currentLinVel.y, 
             z: velocity.current.z
         }, true);
     });
@@ -82,20 +128,18 @@ const Player = forwardRef((props: any, ref) => {
     return (
         <RigidBody
             ref={bodyRef}
-            colliders="cuboid"
-            lockRotations // Evitar que el cubo se caiga rodando
+            colliders={false} // Desactivar auto-colliders para usar uno personalizado
+            lockRotations 
             position={props.position}
+            enabledRotations={[false, false, false]} // Asegura que no rote por físicas
         >
-            <mesh ref={meshRef} castShadow>
-                <boxGeometry args={[1, 1, 1]} />
-                <meshStandardMaterial color={'orange'} />
-                <mesh position={[0, 0.2, 0.5]} castShadow>
-                    <boxGeometry args={[0.5, 0.2, 0.2]} />
-                    <meshStandardMaterial color={'blue'} />
-                </mesh>
-            </mesh>
+            <CapsuleCollider args={[0.5, 0.4]} position={[0, 1.0, 0]} />
+            <group ref={groupRef} dispose={null}>
+                <primitive object={scene} castShadow receiveShadow />
+            </group>
         </RigidBody>
     );
 });
 
 export default Player;
+useGLTF.preload('/player.glb');
