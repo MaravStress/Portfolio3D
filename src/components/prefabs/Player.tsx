@@ -5,8 +5,8 @@ import { RigidBody, RapierRigidBody, CapsuleCollider } from '@react-three/rapier
 import { useGLTF, useAnimations } from '@react-three/drei';
 import usePlayerControls from './usePlayerControls';
 
-const MAX_SPEED = 5;
-const ACCELERATION = 15;
+const MAX_SPEED = 7;
+const ACCELERATION = 10;
 const DECELERATION = 10;
 const ROTATION_SPEED = 10;
 
@@ -15,11 +15,11 @@ const Player = forwardRef((props: any, ref) => {
     const bodyRef = useRef<RapierRigidBody>(null);
     const velocity = useRef(new THREE.Vector3());
     const { forward, backward, left, right } = usePlayerControls();
-    
+
     // Cargar el modelo
     const { scene, animations } = useGLTF('/player.glb');
     const { actions } = useAnimations(animations, groupRef);
-    
+
     const [animation, setAnimation] = useState('idle');
 
     useImperativeHandle(ref, () => ({
@@ -62,23 +62,7 @@ const Player = forwardRef((props: any, ref) => {
         // Determinar Animación
         let nextAnimation = 'idle';
         if (direction.lengthSq() > 0) {
-            // Calcular la diferencia de ángulo para saber si está rotando
-            const targetAngle = Math.atan2(direction.x, direction.z);
-            let angleDiff = targetAngle - groupRef.current.rotation.y;
-            
-            // Normalizar diferencia de ángulo
-            while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
-            while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
-
-            const rotationThreshold = 0.5; // Ajustar sensibilidad del giro
-
-            if (angleDiff > rotationThreshold) {
-                nextAnimation = 'run.turn.L';
-            } else if (angleDiff < -rotationThreshold) {
-                nextAnimation = 'run.turn.R';
-            } else {
-                nextAnimation = 'run';
-            }
+            nextAnimation = 'run';
         } else {
             nextAnimation = 'idle';
         }
@@ -120,7 +104,7 @@ const Player = forwardRef((props: any, ref) => {
         // 5. Mover el cuerpo físico
         bodyRef.current.setLinvel({
             x: velocity.current.x,
-            y: currentLinVel.y, 
+            y: currentLinVel.y,
             z: velocity.current.z
         }, true);
     });
@@ -129,13 +113,13 @@ const Player = forwardRef((props: any, ref) => {
         <RigidBody
             ref={bodyRef}
             colliders={false} // Desactivar auto-colliders para usar uno personalizado
-            lockRotations 
+            lockRotations
             position={props.position}
             enabledRotations={[false, false, false]} // Asegura que no rote por físicas
         >
             <CapsuleCollider args={[0.5, 0.4]} position={[0, 1.0, 0]} />
             <group ref={groupRef} dispose={null}>
-                <primitive object={scene} castShadow receiveShadow />
+                <primitive object={scene} position={[0, 0.13, 0]} castShadow receiveShadow />
             </group>
         </RigidBody>
     );
