@@ -1,5 +1,5 @@
 {
-  "trabajos_3D": [
+  "reviews_3D": [
     {
       "id": "3d-1",
       "titulo": "Modelo 3D - Robot Explorador",
@@ -23,7 +23,7 @@
       "descripcion": "Creación de un entorno urbano cyberpunk con físicas y luces realistas. [Descargar Assets](https://example.com/)"
     }
   ],
-  "trabajos_Programar": [
+  "reviews_Programming": [
     {
       "id": "prog-1",
       "titulo": "E-commerce Premium",
@@ -47,7 +47,7 @@
       "descripcion": "Una herramienta súper rápida para organizar tareas usando metodologías ágiles. [Demo en Vivo](https://example.com/)"
     }
   ],
-  "cine": [
+  "3DAnimations": [
     {
       "id": "cine-1",
       "titulo": "Cortometraje 'El Despertar'",
@@ -104,7 +104,7 @@
       "descripcion": "Corrección de color y etalonaje para un comercial de una marca líder de bebidas. [Ver portfolio](https://example.com/)"
     }
   ],
-  "gamesplace": [
+  "Programming": [
     {
       "id": "game-1",
       "titulo": "Juego Indie RPG",

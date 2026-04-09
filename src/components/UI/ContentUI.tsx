@@ -3,28 +3,28 @@ import { Row, Col, Offcanvas } from 'react-bootstrap';
 import GlassCard from './GlassCard';
 import bd from '../bd.json';
 
-type ContentType = 'trabajos_3D' | 'trabajos_Programar' | 'cine' | 'gamesplace';
+type ContentType = 'reviews_3D' | 'reviews_Programming' | '3DAnimations' | 'Programming';
 
 const CONFIG: Record<ContentType, { emoji: string; label: string; title: string; subtitle: string }> = {
-  trabajos_3D: {
+  reviews_3D: {
     emoji: '🎮',
     label: 'Proyectos 3D',
     title: 'Trabajos 3D',
     subtitle: 'Explora mi portafolio de modelado y diseño tridimensional. Haz clic en cualquiera para ver más detalles.',
   },
-  trabajos_Programar: {
+  reviews_Programming: {
     emoji: '💻',
     label: 'Desarrollo Web & App',
     title: 'Desarrollo & Programación',
     subtitle: 'Descubre mis proyectos técnicos y de desarrollo de software. Haz clic para ver repositorios y demos.',
   },
-  cine: {
+  "3DAnimations": {
     emoji: '🎬',
     label: 'Proyectos de Cine',
     title: 'Cine & Audiovisual',
     subtitle: 'Proyectos de dirección, postproducción y efectos visuales. Haz clic en las tarjetas para ver más información.',
   },
-  gamesplace: {
+  Programming: {
     emoji: '🕹️',
     label: 'Games Place',
     title: 'Games Place',

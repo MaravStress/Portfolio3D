@@ -16,7 +16,7 @@ function CameraTracker() {
 
 
 function App() {
-  const [UIpanel, setUIpanel] = useState<"home" | "trabajos_3D" | "trabajos_Programar" | "cine" | "gamesplace" | null>(null);
+  const [UIpanel, setUIpanel] = useState<"home" | "reviews_3D" | "reviews_Programming" | "3DAnimations" | "Programming" | null>(null);
 
   return (
     <div style={{ width: '100vw', height: '100vh', margin: 0, padding: 0, position: 'relative' }}>
