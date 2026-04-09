@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { CameraControls } from '@react-three/drei';
+import { CameraControls, Sky, Environment } from '@react-three/drei';
 import { Physics } from '@react-three/rapier';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import Player from '../prefabs/Player';
 import Trigger from '../prefabs/Trigger';
 import Layer1 from './Layers/Layer1';
@@ -36,6 +37,15 @@ export default function Scene({ setUIpanel }: SceneProps) {
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
       />
+
+      {/* Skybox genérico y entorno de iluminación */}
+      <Sky sunPosition={[5, 10, 5]} />
+      <Environment preset="city" />
+
+      {/* Postprocesamiento: Efecto Bloom */}
+      <EffectComposer>
+        <Bloom luminanceThreshold={3} mipmapBlur intensity={1.2} />
+      </EffectComposer>
 
       <Physics>
         <Player ref={playerRef} position={[0, 0, 0]} />
