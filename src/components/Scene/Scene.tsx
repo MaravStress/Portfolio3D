@@ -58,16 +58,17 @@ export default function Scene({ setUIpanel }: SceneProps) {
         </group>
 
         {/* //////////////////////////////////////////////////  trigger camera */}
-        <Layer3 
+        <Layer3
           setCameraFree={setCameraFree}
           setCameraPosition={setCameraPosition}
           setCamerafocus={setCamerafocus}
         />
 
         {/* //////////////////////////////////////////////////  trigger UI */}
-        <Layer4 
+        <Layer4
           setUIpanel={setUIpanel}
         />
+
       </Physics>
       <CameraControls ref={cameraControlRef} />
     </>

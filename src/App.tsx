@@ -25,7 +25,7 @@ function App() {
         {UIpanel === "home" && <HomeUI />}
         {UIpanel && UIpanel !== "home" && <ContentUI type={UIpanel} />}
       </div>
-      <div
+      {/* <div
         id="camera-coords"
         style={{
           position: 'absolute',
@@ -50,7 +50,7 @@ function App() {
         X: 0.00
         Y: 0.00
         Z: 0.00
-      </div>
+      </div> */}
       <Canvas shadows camera={{ position: [5, 5, 10], fov: 50 }}>
         <CameraTracker />
         <Scene setUIpanel={setUIpanel} />

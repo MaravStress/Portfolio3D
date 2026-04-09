@@ -1,6 +1,7 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
+import Screen from '../../prefabs/screen';
 
 export default function Layer2() {
   // Cargar el modelo GLB del escenario
@@ -12,8 +13,8 @@ export default function Layer2() {
       if (mesh.isMesh && mesh.material) {
         // Obtenemos el nombre del material (manejando tanto si es un material único como un array)
         const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
-        
-        const hasGlassMaterial = materials.some(mat => 
+
+        const hasGlassMaterial = materials.some(mat =>
           mat.name && mat.name.toLowerCase().includes('glass')
         );
 
@@ -38,7 +39,11 @@ export default function Layer2() {
   return (
     <group name="layer-2">
       <primitive object={scene} />
+      <Screen position={[5.1, 1, 15]} rotation={[0, Math.PI / 2, 0]} scale={[3, 3, 3]} />
+      <Screen position={[5.1, 1, -15]} rotation={[0, Math.PI / 2, 0]} scale={[3, 3, 3]} />
+      <Screen position={[8, 1.2, 23.5]} rotation={[0, Math.PI / 2, 0]} scale={[3, 3, 3]} />
     </group>
+
   );
 }
 
