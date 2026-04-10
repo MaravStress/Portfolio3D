@@ -14,7 +14,8 @@ export default function ScreenHTMLshow({ position, rotation, scale = [3, 3, 3], 
             <Html
                 transform
                 // "blending" suele ser más estable que el true por defecto
-                occlude="blending"
+                // Sin embargo, falla con EffectComposer. 'occlude' usa Raycaster.
+                occlude='blending'
                 // Esto ayuda a que el DOM no se vuelva loco con las escalas
                 distanceFactor={1.2}
                 // Centramos el HTML respecto al grupo
@@ -28,9 +29,8 @@ export default function ScreenHTMLshow({ position, rotation, scale = [3, 3, 3], 
                 <div style={{
                     width: width,
                     height: height,
-                    background: 'red',
+                    background: 'white',
                     padding: '20px',
-                    borderRadius: '20px',
                     // Evita que el navegador intente suavizar fuentes de forma que vibren
                     WebkitFontSmoothing: 'antialiased'
                 }}>
