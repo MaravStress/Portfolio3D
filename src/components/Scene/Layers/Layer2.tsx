@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
-import Screen from '../../prefabs/screen';
+import ScreenHTMLshow from '../../prefabs/ScreenHTMLshow';
 
 export default function Layer2() {
   // Cargar el modelo GLB del escenario
@@ -39,9 +39,10 @@ export default function Layer2() {
   return (
     <group name="layer-2">
       <primitive object={scene} />
-      <Screen position={[5.1, 1, 15]} rotation={[0, Math.PI / 2, 0]} scale={[3, 3, 3]} />
-      <Screen position={[5.1, 1, -15]} rotation={[0, Math.PI / 2, 0]} scale={[3, 3, 3]} />
-      <Screen position={[8, 1.2, 23.5]} rotation={[0, Math.PI / 2, 0]} scale={[3, 3, 3]} />
+      <ScreenHTMLshow position={[5.1, 1, 15]} rotation={[0, Math.PI / 2, 0]} />
+      <ScreenHTMLshow position={[5.1, 1, -15]} rotation={[0, Math.PI / 2, 0]} />
+      <ScreenHTMLshow position={[7.45, 1.15, 23.5]} rotation={[0, Math.PI / 2, 0]} width={900} height={330} /> {/* 3d animations */}
+      <ScreenHTMLshow position={[7.8, 1.85, -23.9]} rotation={[0, Math.PI / 2, 0]} width={700} height={400} /> {/* programming */}
     </group>
 
   );

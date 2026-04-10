@@ -3,10 +3,12 @@ import { Html } from "@react-three/drei";
 interface ScreenProps {
     position: [number, number, number];
     rotation: [number, number, number];
-    scale: [number, number, number];
+    scale?: [number, number, number];
+    width?: number;
+    height?: number;
 }
 
-export default function Screen({ position, rotation, scale }: ScreenProps) {
+export default function ScreenHTMLshow({ position, rotation, scale = [3, 3, 3], width = 600, height = 300 }: ScreenProps) {
     return (
         <group position={position} rotation={rotation} scale={scale}>
             <Html
@@ -24,8 +26,8 @@ export default function Screen({ position, rotation, scale }: ScreenProps) {
                 }}
             >
                 <div style={{
-                    width: '1200px',
-                    height: '600px',
+                    width: width,
+                    height: height,
                     background: 'red',
                     padding: '20px',
                     borderRadius: '20px',
