@@ -20,10 +20,14 @@ function App() {
 
   return (
     <div style={{ width: '100vw', height: '100vh', margin: 0, padding: 0, position: 'relative' }}>
+      <Canvas shadows camera={{ position: [5, 5, 10], fov: 50 }}>
+        <CameraTracker />
+        <Scene setUIpanel={setUIpanel} />
+      </Canvas>
       {/* UI Overlay */}
       <div className="scene-ui-container" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 10 }}>
-        {UIpanel === "home" && <HomeUI />}
-        {UIpanel && UIpanel !== "home" && <ContentUI type={UIpanel} />}
+        <HomeUI show={UIpanel === "home"} />
+        <ContentUI activePanel={UIpanel} />
       </div>
       {/* <div
         id="camera-coords"
@@ -51,10 +55,7 @@ function App() {
         Y: 0.00
         Z: 0.00
       </div> */}
-      <Canvas shadows camera={{ position: [5, 5, 10], fov: 50 }}>
-        <CameraTracker />
-        <Scene setUIpanel={setUIpanel} />
-      </Canvas>
+
     </div>
   );
 }
