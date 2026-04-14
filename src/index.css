@@ -43,7 +43,6 @@ body,
 .glass-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  height: 100%;
 }
 .glass-card:hover {
   transform: translateY(-5px);

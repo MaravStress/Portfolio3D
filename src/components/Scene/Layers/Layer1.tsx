@@ -8,24 +8,26 @@ export function Pisos({ visible = true }: { visible?: boolean }) {
   return (
     <>
       {/* Home */}
-      <Blocking type="ground" size={[10, 10, 1]} visible={visible} />
+      <Blocking type="ground" position={[10, 0, 0]} size={[35, 60, 1]} visible={visible} />
 
       {/* Estudios */}
-      <Blocking type="ground" position={[12.5, 0, 0]} size={[5, 8, 1]} visible={visible} />
+      {/* <Blocking type="ground" position={[12.5, 0, 0]} size={[5, 8, 1]} visible={visible} /> */}
 
       {/* Pasillo */}
-      <Blocking type="ground" position={[7.5, 0, 0]} size={[5, 37, 1]} visible={visible} />
+      {/* <Blocking type="ground" position={[7.5, 0, 0]} size={[5, 37, 1]} visible={visible} />
       <Blocking type="ground" position={[17.5, 0, 16]} size={[15, 5, 1]} visible={visible} />
-      <Blocking type="ground" position={[17.5, 0, -16]} size={[15, 5, 1]} visible={visible} />
+      <Blocking type="ground" position={[17.5, 0, -16]} size={[15, 5, 1]} visible={visible} /> */}
+
       <Blocking type="ramp" position={[22.5, 1, 9.5]} size={[5, 0.5, 10]} visible={visible} />
       <Blocking type="ramp" position={[22.5, 1, -9.5]} rotation={[0, Math.PI, 0]} size={[5, 0.5, 10]} visible={visible} />
       <Blocking type="ground" position={[22.5, 3.638, 0]} size={[5, 10, 1]} visible={visible} />
 
       {/* Cinema */}
-      <Blocking type="ground" position={[12.5, 0, -23.5]} size={[10, 10, 1]} color="green" visible={visible} />
+      {/* <Blocking type="ground" position={[12.5, 0, -23.5]} size={[10, 10, 1]} color="green" visible={visible} /> */}
 
       {/* GamesPlace */}
-      <Blocking type="ground" position={[12.5, 0, 23.5]} size={[10, 10, 1]} color="blue" visible={visible} />
+      {/* <Blocking type="ground" position={[12.5, 0, 23.5]} size={[10, 10, 1]} color="blue" visible={visible} /> */}
+
     </>
   );
 }
@@ -87,13 +89,13 @@ export default function Layer1() {
       // Export when pressing Ctrl + E
       if (e.key === 'e' && (e.ctrlKey || e.metaKey)) {
         e.preventDefault();
-        
+
         if (groupRef.current) {
           const exporter = new GLTFExporter();
           // We must ensure the objects are visible or the exporter may skip them by default.
-          // By default, GLTFExporter respects `visible` properties. 
+          // By default, GLTFExporter respects `visible` properties.
           // However, the `Paredes` are passed `visible={false}` or `true` so they will be exported based on that value.
-          
+
           exporter.parse(
             groupRef.current,
             (gltf) => {
@@ -108,7 +110,7 @@ export default function Layer1() {
               link.click();
               document.body.removeChild(link);
               URL.revokeObjectURL(url);
-              
+
               console.log("Model exported successfully!");
             },
             (error) => {
