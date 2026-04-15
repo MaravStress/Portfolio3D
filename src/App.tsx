@@ -22,7 +22,10 @@ function App() {
 
   return (
     <div style={{ width: '100vw', height: '100vh', margin: 0, padding: 0, position: 'relative' }}>
-      <Canvas shadows camera={{ position: [5, 5, 10], fov: 50 }}>
+      <Canvas
+        camera={{ position: [5, 5, 10], fov: 50 }}
+        gl={{ antialias: true }}
+      >
         <Scene setUIpanel={setUIpanel} />
       </Canvas>
       {/* UI Overlay */}

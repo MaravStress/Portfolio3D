@@ -15,14 +15,14 @@ export default function Blocking({ type = 'box', position = [0, 0, 0], size = [1
         <>
             <RigidBody type={rigidBodyType} includeInvisible>
                 {type === 'box' && (
-                    <mesh position={position} rotation={rotation} castShadow receiveShadow visible={visible}>
+                    <mesh position={position} rotation={rotation} visible={visible}>
                         <boxGeometry args={size} />
                         <meshStandardMaterial color={color} />
                     </mesh>
                 )}
                 {type === 'ramp' && (
                     <group position={position} rotation={rotation}>
-                        <mesh position={[0, -size[1], 0]} rotation={[Math.PI / 8, 0, 0]} castShadow receiveShadow visible={visible}>
+                        <mesh position={[0, -size[1], 0]} rotation={[Math.PI / 8, 0, 0]} visible={visible}>
                             <boxGeometry args={size} />
                             <meshStandardMaterial color={color} />
                         </mesh>
@@ -30,7 +30,7 @@ export default function Blocking({ type = 'box', position = [0, 0, 0], size = [1
                 )}
                 {type === 'ground' && (
                     <group position={position} rotation={rotation}>
-                        <mesh position={[0, -1, 0]} rotation={[-Math.PI / 2, 0, 0]} castShadow receiveShadow visible={visible}>
+                        <mesh position={[0, -1, 0]} rotation={[-Math.PI / 2, 0, 0]} visible={visible}>
                             <planeGeometry args={size} />
                             <meshStandardMaterial color={color} />
                         </mesh>

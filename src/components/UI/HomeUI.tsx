@@ -44,7 +44,7 @@ export default function HomeUI({ show }: { show: boolean }) {
                 width: '60px', height: '60px',
                 borderRadius: '50%',
                 marginRight: '15px',
-                backgroundImage: 'url(/yo.webp)',
+                backgroundImage: 'url(' + import.meta.env.BASE_URL + 'yo.webp)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}>
@@ -53,8 +53,8 @@ export default function HomeUI({ show }: { show: boolean }) {
               <h4 className="mb-0 fw-bold text-white">Eliam Paredes</h4>
               <p className="mb-0 text-white-50" style={{ fontSize: '0.9rem' }}>3D Animations and Programmer</p>
             </div>
-            <a href="#admin" 
-              className="position-absolute text-white-50" 
+            <a href="#admin"
+              className="position-absolute text-white-50"
               style={{ top: '15px', right: '15px', textDecoration: 'none', fontSize: '1.2rem', transition: 'transform 0.2s', cursor: 'pointer' }}
               onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(45deg)'}
               onMouseLeave={(e) => e.currentTarget.style.transform = 'rotate(0deg)'}
@@ -93,7 +93,7 @@ export default function HomeUI({ show }: { show: boolean }) {
             <div
               className="d-flex justify-content-center align-items-center text-white fw-bold fs-5"
               style={{
-                width: '50px', height: '50px', backgroundImage: 'url(/yo.webp)',
+                width: '50px', height: '50px', backgroundImage: 'url(' + import.meta.env.BASE_URL + 'yo.webp)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center', borderRadius: '50%', marginRight: '15px', border: '1px solid rgba(255,255,255,0.2)'
               }}>

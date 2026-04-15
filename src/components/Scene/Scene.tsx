@@ -34,9 +34,6 @@ export default function Scene({ setUIpanel }: SceneProps) {
       <directionalLight
         position={[5, 10, 5]}
         intensity={1.5}
-        castShadow
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
       />
 
       {/* Skybox genérico y entorno de iluminación */}

@@ -119,7 +119,7 @@ const Player = forwardRef((props: any, ref) => {
         >
             <CapsuleCollider args={[0.5, 0.4]} position={[0, 1.0, 0]} />
             <group ref={groupRef} dispose={null}>
-                <primitive object={scene} position={[0, 0.13, 0]} castShadow receiveShadow />
+                <primitive object={scene} position={[0, 0.13, 0]} />
             </group>
         </RigidBody>
     );
