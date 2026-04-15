@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Blender source files (only keep exported .glb)
+public/*.blend
+public/*.blend1
+public/*.af
+public/*.af~lock~
