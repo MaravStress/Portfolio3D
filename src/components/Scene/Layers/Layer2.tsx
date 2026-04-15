@@ -4,7 +4,7 @@ import * as THREE from 'three';
 
 export default function Layer2() {
   // Cargar el modelo GLB del escenario
-  const { scene } = useGLTF('/escenario.glb');
+  const { scene } = useGLTF(`${import.meta.env.BASE_URL}escenario.glb`);
 
   useMemo(() => {
     scene.traverse((child) => {
@@ -43,4 +43,4 @@ export default function Layer2() {
   );
 }
 
-useGLTF.preload('/escenario.glb');
+useGLTF.preload(`${import.meta.env.BASE_URL}escenario.glb`);

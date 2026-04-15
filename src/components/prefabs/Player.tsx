@@ -17,7 +17,7 @@ const Player = forwardRef((props: any, ref) => {
     const { forward, backward, left, right } = usePlayerControls();
 
     // Cargar el modelo
-    const { scene, animations } = useGLTF('/player.glb');
+    const { scene, animations } = useGLTF(`${import.meta.env.BASE_URL}player.glb`);
     const { actions } = useAnimations(animations, groupRef);
 
     const [animation, setAnimation] = useState('idle');
@@ -126,4 +126,4 @@ const Player = forwardRef((props: any, ref) => {
 });
 
 export default Player;
-useGLTF.preload('/player.glb');
+useGLTF.preload(`${import.meta.env.BASE_URL}player.glb`);
