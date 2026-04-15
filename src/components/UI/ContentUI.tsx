@@ -5,30 +5,26 @@ import bd from '../bd.json';
 
 type ContentType = 'reviews_3D' | 'reviews_Programming' | '3DAnimations' | 'Programming';
 
-const CONFIG: Record<ContentType, { emoji: string; label: string; title: string; subtitle: string }> = {
+const CONFIG: Record<ContentType, { emoji: string; title: string; subtitle: string }> = {
   reviews_3D: {
-    emoji: '🎮',
-    label: 'Proyectos 3D',
-    title: 'Trabajos 3D',
-    subtitle: 'Explora mi portafolio de modelado y diseño tridimensional. Haz clic en cualquiera para ver más detalles.',
+    emoji: '🎨',
+    title: 'Costumer Reviews',
+    subtitle: 'Some of the best customer reviews I\'ve received in the field of 3D animation. \n I have a fairly strict privacy policy with my clients, so only reviews will be shown.',
   },
   reviews_Programming: {
     emoji: '💻',
-    label: 'Desarrollo Web & App',
-    title: 'Desarrollo & Programación',
-    subtitle: 'Descubre mis proyectos técnicos y de desarrollo de software. Haz clic para ver repositorios y demos.',
+    title: 'Costumer Reviews',
+    subtitle: 'Some of the best customer reviews I\'ve received in the field of programming. \n I have a fairly strict privacy policy with my clients, so only reviews will be shown.',
   },
   "3DAnimations": {
     emoji: '🎬',
-    label: 'Proyectos de Cine',
-    title: 'Cine & Audiovisual',
-    subtitle: 'Proyectos de dirección, postproducción y efectos visuales. Haz clic en las tarjetas para ver más información.',
+    title: '3D Animations',
+    subtitle: '3D animation projects, modeling, texturing, rigging, animation, rendering and post-production.',
   },
   Programming: {
     emoji: '🕹️',
-    label: 'Games Place',
-    title: 'Games Place',
-    subtitle: 'Desarrollo y diseño de videojuegos interactivos. Observa los distintos trabajos a continuación.',
+    title: 'Programming',
+    subtitle: 'Video game development and design projects or software solutions.',
   },
 };
 
@@ -38,7 +34,7 @@ interface ContentUIProps {
 
 export default function ContentUI({ activePanel }: ContentUIProps) {
   const isContentPanel = activePanel !== null && activePanel !== "home";
-  
+
   const [currentType, setCurrentType] = useState<ContentType>("reviews_3D");
   const [show, setShow] = useState(false);
 

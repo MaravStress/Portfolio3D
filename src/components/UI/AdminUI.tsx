@@ -59,6 +59,21 @@ export default function AdminUI() {
     });
   };
 
+  // Mover proyecto
+  const moveProject = (category: string, index: number, direction: 'up' | 'down') => {
+    setData((prev) => {
+      const categoryData = [...(prev[category] || [])];
+      
+      if (direction === 'up' && index > 0) {
+        [categoryData[index - 1], categoryData[index]] = [categoryData[index], categoryData[index - 1]];
+      } else if (direction === 'down' && index < categoryData.length - 1) {
+        [categoryData[index + 1], categoryData[index]] = [categoryData[index], categoryData[index + 1]];
+      }
+      
+      return { ...prev, [category]: categoryData };
+    });
+  };
+
   // Copiar JSON
   const copyToClipboard = () => {
     navigator.clipboard.writeText(JSON.stringify(data, null, 2));
@@ -144,7 +159,23 @@ export default function AdminUI() {
                   ) : (
                     (data[category] || []).map((project, index) => (
                       <div key={project.id} className="glass-panel bg-dark bg-opacity-50 border-secondary position-relative p-4" style={{ borderRadius: '12px' }}>
-                        <div className="position-absolute top-0 end-0 p-3">
+                        <div className="position-absolute top-0 end-0 p-3 d-flex gap-2">
+                          <button 
+                            className="btn btn-secondary btn-sm" 
+                            onClick={() => moveProject(category, index, 'up')}
+                            disabled={index === 0}
+                            title="Mover arriba"
+                          >
+                            ⬆️
+                          </button>
+                          <button 
+                            className="btn btn-secondary btn-sm" 
+                            onClick={() => moveProject(category, index, 'down')}
+                            disabled={index === (data[category] || []).length - 1}
+                            title="Mover abajo"
+                          >
+                            ⬇️
+                          </button>
                           <button className="btn btn-danger btn-sm" onClick={() => deleteProject(category, project.id)}>
                             🗑️ Eliminar
                           </button>

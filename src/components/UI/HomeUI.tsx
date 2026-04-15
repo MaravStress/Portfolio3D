@@ -14,9 +14,10 @@ export default function HomeUI({ show }: { show: boolean }) {
 
   // Tomaremos un elemento destacado de cada categoría para el Home
   const featuredProjects = [
-    bd["reviews_3D"][0],
-    bd["reviews_Programming"][0],
+    bd["Programming"][0],
     bd["3DAnimations"][0],
+    bd["Programming"][1],
+    bd["3DAnimations"][1],
   ].filter(Boolean); // Filtrar nulos si falla algo
 
   return (
@@ -53,14 +54,14 @@ export default function HomeUI({ show }: { show: boolean }) {
               <h4 className="mb-0 fw-bold text-white">Eliam Paredes</h4>
               <p className="mb-0 text-white-50" style={{ fontSize: '0.9rem' }}>3D Animations and Programmer</p>
             </div>
-            <a href="#admin"
+            {/* <a href="#admin"
               className="position-absolute text-white-50"
               style={{ top: '15px', right: '15px', textDecoration: 'none', fontSize: '1.2rem', transition: 'transform 0.2s', cursor: 'pointer' }}
               onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(45deg)'}
               onMouseLeave={(e) => e.currentTarget.style.transform = 'rotate(0deg)'}
               title="Panel de Datos">
               ⚙️
-            </a>
+            </a> */}
           </div>
 
           {/* Educación */}
@@ -143,10 +144,10 @@ export default function HomeUI({ show }: { show: boolean }) {
         }}
       >
         <Offcanvas.Header style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-          <Offcanvas.Title className="fw-bold fs-3">✨ Proyectos Destacados</Offcanvas.Title>
+          <Offcanvas.Title className="fw-bold fs-3">✨ Featured Projects</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className="p-4" style={{ overflowY: 'auto' }}>
-          <p className="lead mb-4">Algunos de mis mejores trabajos en desarrollo y diseño.</p>
+          <p className="lead mb-4">Some of my best work in development and 3D design.</p>
           <Row className="g-4">
             {featuredProjects.map(trabajo => (
               <Col xs={12} key={trabajo.id}>

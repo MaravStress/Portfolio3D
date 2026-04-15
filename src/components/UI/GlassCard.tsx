@@ -55,16 +55,18 @@ export default function GlassCard({ data }: GlassCardProps) {
   return (
     <>
       <div className="glass-panel glass-card d-flex flex-column h-100" onClick={handleShow} style={{ color: 'white' }}>
-        <div
-          style={{
-            height: '150px',
-            backgroundImage: `url(${data.imagen})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            borderRadius: '8px',
-            marginBottom: '1rem'
-          }}
-        />
+        {data.imagen && (
+          <div
+            style={{
+              height: '150px',
+              backgroundImage: `url(${data.imagen})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              borderRadius: '8px',
+              marginBottom: '1rem'
+            }}
+          />
+        )}
         <h5 className="fw-bold mb-3">{data.titulo}</h5>
         <div className="mt-auto">
           {data.etiquetas.map(tag => (
@@ -80,12 +82,14 @@ export default function GlassCard({ data }: GlassCardProps) {
           <Modal.Title className="fw-bold fs-4" style={{ color: 'white' }}>{data.titulo}</Modal.Title>
         </Modal.Header>
         <Modal.Body className="p-4">
-          <img
-            src={data.imagen}
-            alt={data.titulo}
-            className="img-fluid rounded mb-4 w-100"
-            style={{ maxHeight: '350px', objectFit: 'cover' }}
-          />
+          {data.imagen && (
+            <img
+              src={data.imagen}
+              alt={data.titulo}
+              className="img-fluid rounded mb-4 w-100"
+              style={{ maxHeight: '350px', objectFit: 'cover' }}
+            />
+          )}
           <div className="mb-4">
             {data.etiquetas.map(tag => (
               <Badge bg="primary" className="me-2 mb-2 p-2 px-3 rounded-pill" key={`modal-${tag}`}>
