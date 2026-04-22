@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Row, Col, Offcanvas } from 'react-bootstrap';
 import GlassCard from './GlassCard';
+import FreelanceCard from './FreelanceCard';
 import bd from '../bd.json';
 
 export default function HomeUI({ show }: { show: boolean }) {
@@ -16,6 +17,8 @@ export default function HomeUI({ show }: { show: boolean }) {
   const featuredProjects = [
     bd["Programming"][0],
     bd["3DAnimations"][0],
+    bd["reviews_3D"][0],
+    bd["reviews_Programming"][0],
     bd["Programming"][1],
     bd["3DAnimations"][1],
   ].filter(Boolean); // Filtrar nulos si falla algo
@@ -30,8 +33,9 @@ export default function HomeUI({ show }: { show: boolean }) {
         scroll={true}
         style={{
           width: '480px',
-          background: 'rgba(0, 0, 0, 0)',
-          borderRight: '1px solid rgba(0,0,0,0)',
+          background: 'rgba(255, 255, 255, 0.05)',
+          backdropFilter: 'blur(12px)',
+          borderRight: '1px solid rgba(255,255,255,0.25)',
           zIndex: 1050,
         }}
       >
@@ -84,33 +88,57 @@ export default function HomeUI({ show }: { show: boolean }) {
 
           <hr className="my-2 mb-4 text-white opacity-25" />
 
-          {/* Upwork */}
-          <div
-            className="glass-panel glass-card d-flex align-items-center p-3 mb-4 bg-opacity-10 glass-border"
-            style={{ borderRadius: '15px' }}
-            onClick={() => window.open('https://www.upwork.com/freelancers/~01297e972c464635aa?mp_source=share', '_blank')}
-            title="Abrir perfil en Upwork"
-          >
-            <div
-              className="d-flex justify-content-center align-items-center text-white fw-bold fs-5"
-              style={{
-                width: '50px', height: '50px', backgroundImage: 'url(' + import.meta.env.BASE_URL + 'yo.webp)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center', borderRadius: '50%', marginRight: '15px', border: '1px solid rgba(255,255,255,0.2)'
-              }}>
-
-            </div>
-
-            <div>
-              <h6 className="mb-1 text-white" style={{ fontWeight: 800 }}>Upwork</h6>
-              <div className="d-flex gap-2 mb-1">
-                <span className="badge text-success bg-success bg-opacity-25" style={{ fontSize: '0.65rem', border: '1px solid rgba(25, 135, 84, 0.5)' }}>100% Job Success</span>
-                <span className="badge text-primary bg-primary bg-opacity-25" style={{ fontSize: '0.65rem', border: '1px solid rgba(13, 110, 253, 0.5)' }}>Top Rated</span>
-              </div>
-              <div className="text-warning" style={{ fontSize: '0.8rem', letterSpacing: '2px' }}>⭐⭐⭐⭐⭐</div>
-            </div>
-
-          </div>
+          {/* FreelanceCard */}
+          <FreelanceCard
+            image={import.meta.env.BASE_URL + 'upworklogo.png'}
+            link="https://www.upwork.com/freelancers/~01297e972c464635aa?mp_source=share"
+            title="Upwork"
+            stars={5}
+            tags={[
+              { text: '100% Job Success', color: 'success', borderColor: 'rgba(25, 135, 84, 0.5)' },
+              { text: 'Top Rated', color: 'primary', borderColor: 'rgba(13, 110, 253, 0.5)' }
+            ]}
+          />
+          {/* <FreelanceCard
+            image={import.meta.env.BASE_URL + 'fiverrlogo.svg'}
+            link="https://es.fiverr.com/s/bdNQZoW"
+            title="Fiverr"
+            stars={5}
+            tags={[
+              { text: '100% Job Success', color: 'success', borderColor: 'rgba(25, 135, 84, 0.5)' },
+              { text: 'Top Rated', color: 'primary', borderColor: 'rgba(13, 110, 253, 0.5)' }
+            ]}
+          /> */}
+          {/* <FreelanceCard
+            image={import.meta.env.BASE_URL + 'workanalogo.png'}
+            link="https://www.workana.com/e/a7b1552d4459a6b06b51ccd0f71cc949"
+            title="Workana"
+            stars={5}
+            tags={[
+              { text: '100% Job Success', color: 'success', borderColor: 'rgba(25, 135, 84, 0.5)' },
+              { text: 'Top Rated', color: 'primary', borderColor: 'rgba(13, 110, 253, 0.5)' }
+            ]}
+          /> */}
+          {/* <FreelanceCard
+            image={import.meta.env.BASE_URL + 'yo.webp'}
+            link="https://www.malt.es/profile/eliamjesusparedesguerrero1"
+            title="Malt"
+            stars={5}
+            tags={[
+              { text: '100% Job Success', color: 'success', borderColor: 'rgba(25, 135, 84, 0.5)' },
+              { text: 'Top Rated', color: 'primary', borderColor: 'rgba(13, 110, 253, 0.5)' }
+            ]}
+          /> */}
+          <FreelanceCard
+            image={import.meta.env.BASE_URL + 'linkedInlogo.png'}
+            link="https://www.linkedin.com/in/eliam-paredes-803660186/"
+            title="LinkedIn"
+            stars={5}
+            tags={[
+              { text: '100% Job Success', color: 'success', borderColor: 'rgba(25, 135, 84, 0.5)' },
+              { text: 'Top Rated', color: 'primary', borderColor: 'rgba(13, 110, 253, 0.5)' }
+            ]}
+          />
 
           {/* Email */}
           <div
@@ -136,9 +164,9 @@ export default function HomeUI({ show }: { show: boolean }) {
         scroll={true}
         style={{
           width: '480px',
-          background: 'rgba(15, 15, 30, 0.16)',
-          backdropFilter: 'blur(20px)',
-          borderLeft: '1px solid rgba(255,255,255,0.1)',
+          background: 'rgba(255, 255, 255, 0.05)',
+          backdropFilter: 'blur(12px)',
+          borderLeft: '1px solid rgba(255,255,255,0.25)',
           color: 'white',
           zIndex: 1050,
         }}

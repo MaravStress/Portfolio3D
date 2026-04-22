@@ -58,9 +58,9 @@ export default function ContentUI({ activePanel }: ContentUIProps) {
       scroll={true}
       style={{
         width: '480px',
-        background: 'rgba(15, 15, 30, 0.16)',
-        backdropFilter: 'blur(20px)',
-        borderLeft: '1px solid rgba(255,255,255,0.1)',
+        background: 'rgba(255, 255, 255, 0.05)',
+        backdropFilter: 'blur(12px)',
+        borderLeft: '1px solid rgba(255,255,255,0.25)',
         color: 'white',
         zIndex: 1050,
       }}
